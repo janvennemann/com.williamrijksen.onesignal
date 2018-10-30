@@ -76,7 +76,7 @@ static OneSignalManager* _oneSignalManager = nil;
             NSLog(@"Notification opened handler added");
             NSDictionary* userInfo = [[[TiApp app] launchOptions] objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
 	        if (userInfo) {
-	            OneSignalPayload *payload = [[OneSignalPayload alloc] initWithRawMessage:userInfo];
+	            OneSignalPayload *payload = [[OneSignalPayload alloc] initWithRawMessage:userInfo.data];
 	            NSLog(@"[DEBUG] com.williamrijksen.onesignal FIRE cold boot TiNotificationOpened");
 	            [self fireEvent:TiNotificationOpened withObject:[payload toDictionary]];
 	        }
@@ -84,7 +84,7 @@ static OneSignalManager* _oneSignalManager = nil;
             NSLog(@"Notification received handler added");
             NSDictionary* userInfo = [[[TiApp app] launchOptions] objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
             if (userInfo) {
-                OneSignalPayload *payload = [[OneSignalPayload alloc] initWithRawMessage:userInfo];
+                OneSignalPayload *payload = [[OneSignalPayload alloc] initWithRawMessage:userInfo.data];
                 NSLog(@"[DEBUG] com.williamrijksen.onesignal FIRE TiNotificationReceived");
                 [self fireEvent:TiNotificationReceived withObject:[payload toDictionary]];
             }
